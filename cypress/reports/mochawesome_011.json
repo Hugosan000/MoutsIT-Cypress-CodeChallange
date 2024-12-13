@@ -1,0 +1,181 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-13T20:11:21.951Z",
+    "end": "2024-12-13T20:11:24.088Z",
+    "duration": 2137,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "9bca5f37-91d0-458d-931b-22deaf0f2633",
+      "title": "",
+      "fullFile": "cypress\\e2e\\api_test\\usuarios_api.cy.js",
+      "file": "cypress\\e2e\\api_test\\usuarios_api.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0439d8fb-69c6-46c1-a10f-0549cb1c7bc0",
+          "title": "Testes de API - Usuários ServeRest @APITest",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve cadastrar um novo usuário com sucesso @smoke @crud @post",
+              "fullTitle": "Testes de API - Usuários ServeRest @APITest Deve cadastrar um novo usuário com sucesso @smoke @crud @post",
+              "timedOut": null,
+              "duration": 376,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Gerando valor aleatório para definir se usuário será admin\nconst isAdmin = Math.random() < 0.5;\n// Gerando dados fake para nome e email\nconst fakerName = faker.person.fullName();\nconst fakerEmail = faker.internet.email();\n// Criando objeto com dados do novo usuário\nconst novoUsuario = {\n  nome: `automatedcypress+${fakerName}`,\n  email: `automatedcypress+${fakerEmail}`,\n  password: Cypress.env(\"PASSWORD\"),\n  administrador: isAdmin ? \"true\" : \"false\"\n};\ntestData.novoUsuario = novoUsuario;\n// Enviando requisição POST para criar novo usuário\ncy.request({\n  method: \"POST\",\n  url: `${Cypress.env(\"apiUrl\")}/usuarios`,\n  headers: {\n    Authorization: Cypress.env(\"TOKEN\")\n  },\n  body: novoUsuario\n}).then(response => {\n  // Armazenando resposta para possível uso posterior\n  testData.response = {\n    status: response.status,\n    body: response.body\n  };\n  // Logando informações do usuário criado\n  cy.log(\"**Dados do Usuário Criado**\");\n  cy.log(`Nome: ${novoUsuario.nome}`);\n  cy.log(`Email: ${novoUsuario.email}`);\n  cy.log(`Administrador: ${novoUsuario.administrador}`);\n  cy.log(`ID: ${response.body._id}`);\n  // Validando resposta da API\n  expect(response.status).to.equal(201);\n  expect(response.body.message).to.equal(\"Cadastro realizado com sucesso\");\n  userId = response.body._id;\n});",
+              "err": {},
+              "uuid": "7c872121-a541-4140-92a1-8446cb64f963",
+              "parentUUID": "0439d8fb-69c6-46c1-a10f-0549cb1c7bc0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve listar todos os usuários @smoke @crud @get",
+              "fullTitle": "Testes de API - Usuários ServeRest @APITest Deve listar todos os usuários @smoke @crud @get",
+              "timedOut": null,
+              "duration": 651,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição GET para listar todos os usuários\ncy.request({\n  method: \"GET\",\n  url: `${Cypress.env(\"apiUrl\")}/usuarios`,\n  headers: {\n    Authorization: Cypress.env(\"TOKEN\")\n  }\n}).then(response => {\n  // Validando resposta da API\n  expect(response.status).to.equal(200);\n  expect(response.body.usuarios).to.be.an(\"array\");\n});",
+              "err": {},
+              "uuid": "29f9989c-ade3-403d-9570-a510abc897ce",
+              "parentUUID": "0439d8fb-69c6-46c1-a10f-0549cb1c7bc0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve buscar usuário por ID @crud @get",
+              "fullTitle": "Testes de API - Usuários ServeRest @APITest Deve buscar usuário por ID @crud @get",
+              "timedOut": null,
+              "duration": 348,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição GET para buscar usuário específico\ncy.request({\n  method: \"GET\",\n  url: `${Cypress.env(\"apiUrl\")}/usuarios/${userId}`,\n  headers: {\n    Authorization: Cypress.env(\"TOKEN\")\n  }\n}).then(response => {\n  // Logando resposta para debug\n  console.log(\"Resposta do GET por ID:\", response.body);\n  // Validando resposta e propriedades esperadas\n  expect(response.status).to.equal(200);\n  expect(response.body).to.have.property(\"nome\");\n  expect(response.body).to.have.property(\"email\");\n});",
+              "err": {},
+              "uuid": "e4dc6ff2-33f9-4b44-8b76-49fcb4aa3a73",
+              "parentUUID": "0439d8fb-69c6-46c1-a10f-0549cb1c7bc0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve editar um usuário existente @crud @put",
+              "fullTitle": "Testes de API - Usuários ServeRest @APITest Deve editar um usuário existente @crud @put",
+              "timedOut": null,
+              "duration": 350,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Criando dados atualizados para o usuário\nconst usuarioEditado = {\n  nome: `automatedcypress+${faker.person.fullName()}`,\n  email: `automatedcypress+${faker.internet.email()}`,\n  password: Cypress.env(\"PASSWORD\"),\n  administrador: \"true\"\n};\n// Enviando requisição PUT para atualizar o usuário\ncy.request({\n  method: \"PUT\",\n  url: `${Cypress.env(\"apiUrl\")}/usuarios/${userId}`,\n  headers: {\n    Authorization: Cypress.env(\"TOKEN\")\n  },\n  body: usuarioEditado\n}).then(response => {\n  // Logando resposta para debug\n  console.log(\"Resposta do PUT:\", response.body);\n  // Validando resposta da API\n  expect(response.status).to.equal(200);\n  expect(response.body.message).to.equal(\"Registro alterado com sucesso\");\n});",
+              "err": {},
+              "uuid": "7bca420e-0e52-4fc5-a4c7-ed2d7982a395",
+              "parentUUID": "0439d8fb-69c6-46c1-a10f-0549cb1c7bc0",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve excluir um usuário @crud @delete",
+              "fullTitle": "Testes de API - Usuários ServeRest @APITest Deve excluir um usuário @crud @delete",
+              "timedOut": null,
+              "duration": 344,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição DELETE para remover o usuário\ncy.request({\n  method: \"DELETE\",\n  url: `${Cypress.env(\"apiUrl\")}/usuarios/${userId}`,\n  headers: {\n    Authorization: Cypress.env(\"TOKEN\")\n  }\n}).then(response => {\n  // Logando resposta para debug\n  console.log(\"Resposta do DELETE:\", response.body);\n  // Validando resposta da API\n  expect(response.status).to.equal(200);\n  expect(response.body.message).to.equal(\"Registro excluído com sucesso\");\n});",
+              "err": {},
+              "uuid": "b9fb015e-cce0-4777-ac00-31437f0690e7",
+              "parentUUID": "0439d8fb-69c6-46c1-a10f-0549cb1c7bc0",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7c872121-a541-4140-92a1-8446cb64f963",
+            "29f9989c-ade3-403d-9570-a510abc897ce",
+            "e4dc6ff2-33f9-4b44-8b76-49fcb4aa3a73",
+            "7bca420e-0e52-4fc5-a4c7-ed2d7982a395",
+            "b9fb015e-cce0-4777-ac00-31437f0690e7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2069,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

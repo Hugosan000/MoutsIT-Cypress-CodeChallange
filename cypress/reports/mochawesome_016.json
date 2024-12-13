@@ -1,0 +1,181 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-13T20:13:13.134Z",
+    "end": "2024-12-13T20:13:15.032Z",
+    "duration": 1898,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "95a4240d-668a-4ce4-891a-06149f600470",
+      "title": "",
+      "fullFile": "cypress\\e2e\\api_test\\produtos_api.cy.js",
+      "file": "cypress\\e2e\\api_test\\produtos_api.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a7c418cc-e448-4514-a1f5-3cc46016962a",
+          "title": "Testes de API - Produtos ServeRest @api @produtos",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve cadastrar um novo produto com sucesso @smoke @crud @post @positivo",
+              "fullTitle": "Testes de API - Produtos ServeRest @api @produtos Deve cadastrar um novo produto com sucesso @smoke @crud @post @positivo",
+              "timedOut": null,
+              "duration": 381,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Gerando nome de arquivo de imagem aleatório com extensão válida\nconst extensoes = ['jpg', 'png', 'gif'];\nconst extensaoAleatoria = faker.helpers.arrayElement(extensoes);\nconst nomeImagem = `C:\\\\fakepath\\\\${faker.string.numeric(10)}.${extensaoAleatoria}`;\n// Criando dados do novo produto com informações aleatórias\nconst novoProduto = {\n  nome: `Produto ${faker.commerce.productName()}`,\n  preco: parseInt(faker.commerce.price(), 10),\n  descricao: faker.commerce.productDescription(),\n  quantidade: faker.number.int({\n    min: 1,\n    max: 100\n  }),\n  imagem: nomeImagem\n};\ntestData.novoProduto = novoProduto;\n// Enviando requisição POST para criar novo produto\ncy.request({\n  method: 'POST',\n  url: `${Cypress.env('apiUrl')}/produtos`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  },\n  body: novoProduto\n}).then(response => {\n  // Armazenando resposta para possível uso posterior\n  testData.response = {\n    status: response.status,\n    body: response.body\n  };\n  // Logando informações do produto criado para debug\n  console.log('Produto Criado:', response.body);\n  cy.log('**Produto Criado**');\n  cy.log(`Nome: ${novoProduto.nome}`);\n  cy.log(`Preço: ${novoProduto.preco}`);\n  cy.log(`Descrição: ${novoProduto.descricao}`);\n  cy.log(`Quantidade: ${novoProduto.quantidade}`);\n  cy.log(`Imagem: ${novoProduto.imagem}`);\n  cy.log(`ID: ${response.body._id}`);\n  // Validando resposta da API\n  expect(response.status).to.equal(201);\n  expect(response.body.message).to.equal('Cadastro realizado com sucesso');\n  productId = response.body._id;\n});",
+              "err": {},
+              "uuid": "8f69a74f-acac-49a2-bdf2-ec768f288751",
+              "parentUUID": "a7c418cc-e448-4514-a1f5-3cc46016962a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve listar todos os produtos @crud @get",
+              "fullTitle": "Testes de API - Produtos ServeRest @api @produtos Deve listar todos os produtos @crud @get",
+              "timedOut": null,
+              "duration": 401,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição GET para listar todos os produtos\ncy.request({\n  method: 'GET',\n  url: `${Cypress.env('apiUrl')}/produtos`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  }\n}).then(response => {\n  console.log('Lista de Produtos:', response.body);\n  expect(response.status).to.equal(200);\n  expect(response.body.produtos).to.be.an('array');\n});",
+              "err": {},
+              "uuid": "ea36be89-b50e-4518-bdfb-fcaa800ab2f2",
+              "parentUUID": "a7c418cc-e448-4514-a1f5-3cc46016962a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve buscar produto por ID @crud @get",
+              "fullTitle": "Testes de API - Produtos ServeRest @api @produtos Deve buscar produto por ID @crud @get",
+              "timedOut": null,
+              "duration": 340,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição GET para buscar produto específico pelo ID\ncy.request({\n  method: 'GET',\n  url: `${Cypress.env('apiUrl')}/produtos/${productId}`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  }\n}).then(response => {\n  // Logando informações do produto encontrado\n  console.log('Produto por ID:', response.body);\n  cy.log('**Produto Buscado**');\n  cy.log(`Nome: ${response.body.nome}`);\n  cy.log(`Preço: ${response.body.preco}`);\n  cy.log(`Descrição: ${response.body.descricao}`);\n  cy.log(`Quantidade: ${response.body.quantidade}`);\n  cy.log(`ID: ${response.body._id}`);\n  // Validando resposta e propriedades esperadas\n  expect(response.status).to.equal(200);\n  expect(response.body).to.have.property('nome');\n  expect(response.body).to.have.property('preco');\n});",
+              "err": {},
+              "uuid": "1825448b-bb96-4b92-b1e8-5d2d822329c2",
+              "parentUUID": "a7c418cc-e448-4514-a1f5-3cc46016962a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve editar um produto existente @crud @put",
+              "fullTitle": "Testes de API - Produtos ServeRest @api @produtos Deve editar um produto existente @crud @put",
+              "timedOut": null,
+              "duration": 352,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Gerando novo nome de arquivo de imagem aleatório\nconst extensoes = ['jpg', 'png', 'gif'];\nconst extensaoAleatoria = faker.helpers.arrayElement(extensoes);\nconst nomeImagem = `C:\\\\fakepath\\\\${faker.string.numeric(10)}.${extensaoAleatoria}`;\n// Criando dados atualizados para o produto\nconst produtoEditado = {\n  nome: `Produto Editado ${faker.commerce.productName()}`,\n  preco: parseInt(faker.commerce.price(), 10),\n  descricao: faker.commerce.productDescription(),\n  quantidade: faker.number.int({\n    min: 1,\n    max: 100\n  }),\n  imagem: nomeImagem\n};\n// Enviando requisição PUT para atualizar o produto\ncy.request({\n  method: 'PUT',\n  url: `${Cypress.env('apiUrl')}/produtos/${productId}`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  },\n  body: produtoEditado\n}).then(response => {\n  // Logando informações do produto atualizado\n  console.log('Produto Editado:', response.body);\n  cy.log('**Produto Editado**');\n  cy.log(`Nome: ${produtoEditado.nome}`);\n  cy.log(`Preço: ${produtoEditado.preco}`);\n  cy.log(`Descrição: ${produtoEditado.descricao}`);\n  cy.log(`Quantidade: ${produtoEditado.quantidade}`);\n  cy.log(`Imagem: ${produtoEditado.imagem}`);\n  cy.log(`ID: ${productId}`);\n  // Validando resposta da API\n  expect(response.status).to.equal(200);\n  expect(response.body.message).to.equal('Registro alterado com sucesso');\n});",
+              "err": {},
+              "uuid": "8ecc67bd-2bd5-4921-94fc-2e3b22660cae",
+              "parentUUID": "a7c418cc-e448-4514-a1f5-3cc46016962a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve excluir um produto @crud @delete",
+              "fullTitle": "Testes de API - Produtos ServeRest @api @produtos Deve excluir um produto @crud @delete",
+              "timedOut": null,
+              "duration": 356,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição DELETE para remover o produto\ncy.request({\n  method: 'DELETE',\n  url: `${Cypress.env('apiUrl')}/produtos/${productId}`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  }\n}).then(response => {\n  // Logando informações da exclusão\n  console.log('Produto Excluído:', response.body);\n  cy.log('**Produto Excluído**');\n  cy.log(`ID: ${productId}`);\n  // Validando resposta da API\n  expect(response.status).to.equal(200);\n  expect(response.body.message).to.equal('Registro excluído com sucesso');\n});",
+              "err": {},
+              "uuid": "1552241a-eff8-4e99-b478-6819e520f393",
+              "parentUUID": "a7c418cc-e448-4514-a1f5-3cc46016962a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "8f69a74f-acac-49a2-bdf2-ec768f288751",
+            "ea36be89-b50e-4518-bdfb-fcaa800ab2f2",
+            "1825448b-bb96-4b92-b1e8-5d2d822329c2",
+            "8ecc67bd-2bd5-4921-94fc-2e3b22660cae",
+            "1552241a-eff8-4e99-b478-6819e520f393"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1830,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

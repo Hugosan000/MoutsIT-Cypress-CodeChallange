@@ -1,0 +1,181 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-13T20:12:22.265Z",
+    "end": "2024-12-13T20:12:31.432Z",
+    "duration": 9167,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "71191e97-c4c2-4caf-a51a-e97ba80cd659",
+      "title": "",
+      "fullFile": "cypress\\e2e\\UI_test\\login_ui.cy.js",
+      "file": "cypress\\e2e\\UI_test\\login_ui.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "18abb35b-3c47-4874-9e32-c74536706958",
+          "title": "Login - UI Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "deve exibir a página de login corretamente @ui @smoke",
+              "fullTitle": "Login - UI Tests deve exibir a página de login corretamente @ui @smoke",
+              "timedOut": null,
+              "duration": 1008,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_loginPage.default.emailInput.should('be.visible');\n_loginPage.default.senhaInput.should('be.visible');\n_loginPage.default.entrarButton.should('be.visible');",
+              "err": {},
+              "uuid": "b7993ba3-474d-4068-9a58-a0d37c3823f9",
+              "parentUUID": "18abb35b-3c47-4874-9e32-c74536706958",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve fazer login com sucesso @ui @login",
+              "fullTitle": "Login - UI Tests deve fazer login com sucesso @ui @login",
+              "timedOut": null,
+              "duration": 2113,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_loginPage.default.fillEmail(emailValido);\n_loginPage.default.fillSenha(senhaValida);\n_loginPage.default.clickEntrar();\n// Verificar se redirecionou para home após login\ncy.url().should('include', '/admin/home');",
+              "err": {},
+              "uuid": "a002ec3c-e0a5-4871-920f-3a10c6e4b582",
+              "parentUUID": "18abb35b-3c47-4874-9e32-c74536706958",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve exibir mensagem de erro ao tentar login com credenciais inválidas @ui @login @error",
+              "fullTitle": "Login - UI Tests deve exibir mensagem de erro ao tentar login com credenciais inválidas @ui @login @error",
+              "timedOut": null,
+              "duration": 1736,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Tentativa com email e senha inválidos\n_loginPage.default.fillEmail(emailInvalido);\n_loginPage.default.fillSenha(senhaInvalida);\n_loginPage.default.clickEntrar();\n// Verifica se a mensagem de erro aparece\n_loginPage.default.alertMessage.should('be.visible').and('contain', 'Email e/ou senha inválidos');\n// Verifica se permanece na página de login\ncy.url().should('include', '/login');\n// Verifica se os valores permanecem nos campos\n_loginPage.default.emailInput.should('have.value', emailInvalido);\n_loginPage.default.senhaInput.should('have.value', senhaInvalida);",
+              "err": {},
+              "uuid": "ddad0e3c-2deb-4fc6-bf9f-2a771e96a5dd",
+              "parentUUID": "18abb35b-3c47-4874-9e32-c74536706958",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve exibir mensagem de erro ao tentar login com campos vazios @ui @login @error",
+              "fullTitle": "Login - UI Tests deve exibir mensagem de erro ao tentar login com campos vazios @ui @login @error",
+              "timedOut": null,
+              "duration": 715,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_loginPage.default.clickEntrar();\n// Verifica mensagens de validação\n_loginPage.default.alertMessage.should('be.visible').and('contain', 'Email é obrigatório').and('contain', 'Password é obrigatório');",
+              "err": {},
+              "uuid": "226d4807-a8d2-426a-9257-768409289b6a",
+              "parentUUID": "18abb35b-3c47-4874-9e32-c74536706958",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve reproduzir bug: mensagem incorreta ao corrigir email após tentativa falha @ui @login @error @bug",
+              "fullTitle": "Login - UI Tests deve reproduzir bug: mensagem incorreta ao corrigir email após tentativa falha @ui @login @error @bug",
+              "timedOut": null,
+              "duration": 1950,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Primeira tentativa com email incorreto e senha correta\n_loginPage.default.fillEmail('email_incorreto@teste.com');\n_loginPage.default.fillSenha(senhaValida);\n_loginPage.default.clickEntrar();\n// Verifica primeira mensagem de erro\n_loginPage.default.alertMessage.should('be.visible').and('contain', 'Email e/ou senha inválidos');\n// Limpa e corrige o email\n_loginPage.default.emailInput.clear().type(emailValido);\n_loginPage.default.clickEntrar();\n// Bug: Verifica que aparece mensagem incorreta\n_loginPage.default.alertMessage.should('be.visible').and('contain', 'Password é obrigatório');",
+              "err": {},
+              "uuid": "54fa4043-ce5b-412e-8458-de7a0c795175",
+              "parentUUID": "18abb35b-3c47-4874-9e32-c74536706958",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b7993ba3-474d-4068-9a58-a0d37c3823f9",
+            "a002ec3c-e0a5-4871-920f-3a10c6e4b582",
+            "ddad0e3c-2deb-4fc6-bf9f-2a771e96a5dd",
+            "226d4807-a8d2-426a-9257-768409289b6a",
+            "54fa4043-ce5b-412e-8458-de7a0c795175"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7522,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

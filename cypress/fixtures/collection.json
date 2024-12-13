@@ -1,0 +1,311 @@
+{
+    "info": {
+      "name": "ServeRest API",
+      "description": "Collection completa da API ServeRest",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Login",
+        "item": [
+          {
+            "name": "Login",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"email\": \"fulano@qa.com\",\n  \"password\": \"teste\"\n}"
+              },
+              "url": {
+                "raw": "https://serverest.dev/login",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["login"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Usuários",
+        "item": [
+          {
+            "name": "Listar Usuários",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://serverest.dev/usuarios",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["usuarios"]
+              }
+            }
+          },
+          {
+            "name": "Cadastrar Usuário",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"nome\": \"Fulano da Silva\",\n  \"email\": \"fulano@qa.com\",\n  \"password\": \"teste\",\n  \"administrador\": \"true\"\n}"
+              },
+              "url": {
+                "raw": "https://serverest.dev/usuarios",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["usuarios"]
+              }
+            }
+          },
+          {
+            "name": "Buscar Usuário por ID",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://serverest.dev/usuarios/:id",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["usuarios", ":id"]
+              }
+            }
+          },
+          {
+            "name": "Editar Usuário",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"nome\": \"Fulano Editado\",\n  \"email\": \"fulano@qa.com\",\n  \"password\": \"teste\",\n  \"administrador\": \"true\"\n}"
+              },
+              "url": {
+                "raw": "https://serverest.dev/usuarios/:id",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["usuarios", ":id"]
+              }
+            }
+          },
+          {
+            "name": "Excluir Usuário",
+            "request": {
+              "method": "DELETE",
+              "url": {
+                "raw": "https://serverest.dev/usuarios/:id",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["usuarios", ":id"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Produtos",
+        "item": [
+          {
+            "name": "Listar Produtos",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://serverest.dev/produtos",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["produtos"]
+              }
+            }
+          },
+          {
+            "name": "Cadastrar Produto",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "{{token}}"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"nome\": \"Produto Teste\",\n  \"preco\": 100,\n  \"descricao\": \"Descrição do produto\",\n  \"quantidade\": 10\n}"
+              },
+              "url": {
+                "raw": "https://serverest.dev/produtos",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["produtos"]
+              }
+            }
+          },
+          {
+            "name": "Buscar Produto por ID",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://serverest.dev/produtos/:id",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["produtos", ":id"]
+              }
+            }
+          },
+          {
+            "name": "Editar Produto",
+            "request": {
+              "method": "PUT",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "{{token}}"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"nome\": \"Produto Editado\",\n  \"preco\": 200,\n  \"descricao\": \"Descrição editada\",\n  \"quantidade\": 20\n}"
+              },
+              "url": {
+                "raw": "https://serverest.dev/produtos/:id",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["produtos", ":id"]
+              }
+            }
+          },
+          {
+            "name": "Excluir Produto",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "{{token}}"
+                }
+              ],
+              "url": {
+                "raw": "https://serverest.dev/produtos/:id",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["produtos", ":id"]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "Carrinhos",
+        "item": [
+          {
+            "name": "Listar Carrinhos",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://serverest.dev/carrinhos",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["carrinhos"]
+              }
+            }
+          },
+          {
+            "name": "Cadastrar Carrinho",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "key": "Authorization",
+                  "value": "{{token}}"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"produtos\": [\n    {\n      \"idProduto\": \"ID_DO_PRODUTO\",\n      \"quantidade\": 1\n    }\n  ]\n}"
+              },
+              "url": {
+                "raw": "https://serverest.dev/carrinhos",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["carrinhos"]
+              }
+            }
+          },
+          {
+            "name": "Buscar Carrinho por ID",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "https://serverest.dev/carrinhos/:id",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["carrinhos", ":id"]
+              }
+            }
+          },
+          {
+            "name": "Concluir Compra",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "{{token}}"
+                }
+              ],
+              "url": {
+                "raw": "https://serverest.dev/carrinhos/concluir-compra",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["carrinhos", "concluir-compra"]
+              }
+            }
+          },
+          {
+            "name": "Cancelar Compra",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "{{token}}"
+                }
+              ],
+              "url": {
+                "raw": "https://serverest.dev/carrinhos/cancelar-compra",
+                "protocol": "https",
+                "host": ["serverest", "dev"],
+                "path": ["carrinhos", "cancelar-compra"]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }

@@ -1,0 +1,243 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2024-12-13T20:10:05.253Z",
+    "end": "2024-12-13T20:10:18.109Z",
+    "duration": 12856,
+    "testsRegistered": 8,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 7,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "fb53ba1a-7e0c-444f-8bdf-91423def520f",
+      "title": "",
+      "fullFile": "cypress\\e2e\\UI_test\\cadastrar_usuarios.cy.js",
+      "file": "cypress\\e2e\\UI_test\\cadastrar_usuarios.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "319b6e47-726a-4ed6-82b9-9fdb65302aed",
+          "title": "Cadastro de Usuários - UI Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "deve exibir a página de cadastro corretamente @ui @smoke",
+              "fullTitle": "Cadastro de Usuários - UI Tests deve exibir a página de cadastro corretamente @ui @smoke",
+              "timedOut": null,
+              "duration": 6330,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Verificar se os elementos estão presentes e visíveis\n_cadastroUsuarioPage.default.verifyNomeInputVisible();\n_cadastroUsuarioPage.default.verifyEmailInputVisible();\n_cadastroUsuarioPage.default.verifyPasswordInputVisible();\n_cadastroUsuarioPage.default.verifyCheckboxVisible();\n_cadastroUsuarioPage.default.verifyCadastrarButtonVisible();",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: expected 'https://front.serverest.dev/login' to include '/admin/home'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Cadastro de Usuários - UI T...`",
+                "estack": "AssertionError: Timed out retrying after 4000ms: expected 'https://front.serverest.dev/login' to include '/admin/home'\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Cadastro de Usuários - UI T...`\n    at Context.eval (webpack:///./cypress/e2e/UI_test/cadastrar_usuarios.cy.js:26:17)",
+                "diff": null
+              },
+              "uuid": "6990dcf5-c13d-4c24-820e-9eda30ab3907",
+              "parentUUID": "319b6e47-726a-4ed6-82b9-9fdb65302aed",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve cadastrar um novo usuário com sucesso @ui @cadastro",
+              "fullTitle": "Cadastro de Usuários - UI Tests deve cadastrar um novo usuário com sucesso @ui @cadastro",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const usuario = {\n  nome: _faker.faker.person.fullName(),\n  email: _faker.faker.internet.email(),\n  senha: _faker.faker.internet.password({\n    length: 8\n  })\n};\n_cadastroUsuarioPage.default.fillNome(usuario.nome);\n_cadastroUsuarioPage.default.fillEmail(usuario.email);\n_cadastroUsuarioPage.default.fillPassword(usuario.senha);\n_cadastroUsuarioPage.default.clickCadastrar();\n// TODO: Verificar se o usuário foi cadastrado com sucesso - Implementação futura - Checkar com Dev team\n// CadastroUsuarioPage.alertMessage\n//     .should('be.visible')\n//     .and('contain', 'Cadastro realizado com sucesso')",
+              "err": {},
+              "uuid": "3e12217d-2a5d-49c7-b4df-15b01fe8e578",
+              "parentUUID": "319b6e47-726a-4ed6-82b9-9fdb65302aed",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "deve cadastrar um novo usuário administrador com sucesso @ui @cadastro",
+              "fullTitle": "Cadastro de Usuários - UI Tests deve cadastrar um novo usuário administrador com sucesso @ui @cadastro",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const adminUser = {\n  nome: _faker.faker.person.fullName(),\n  email: _faker.faker.internet.email(),\n  senha: _faker.faker.internet.password({\n    length: 8\n  })\n};\n_cadastroUsuarioPage.default.fillNome(adminUser.nome);\n_cadastroUsuarioPage.default.fillEmail(adminUser.email);\n_cadastroUsuarioPage.default.fillPassword(adminUser.senha);\n_cadastroUsuarioPage.default.selectAdministrador();\n_cadastroUsuarioPage.default.clickCadastrar();\n// TODO: Verificar se o usuário foi cadastrado com sucesso - Implementação futura - Checkar com Dev team\n// CadastroUsuarioPage.alertMessage\n//     .should('be.visible')\n//     .and('contain', 'Cadastro realizado com sucesso')",
+              "err": {},
+              "uuid": "343ee0b9-03fc-4cf6-837e-b86c79b38599",
+              "parentUUID": "319b6e47-726a-4ed6-82b9-9fdb65302aed",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "deve exibir erro ao tentar cadastrar com email já existente @ui @cadastro @error",
+              "fullTitle": "Cadastro de Usuários - UI Tests deve exibir erro ao tentar cadastrar com email já existente @ui @cadastro @error",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_cadastroUsuarioPage.default.fillNome(novoUsuario.nome);\n_cadastroUsuarioPage.default.fillEmail(Cypress.env('EMAIL')); // email já existente\n_cadastroUsuarioPage.default.fillPassword(novoUsuario.senha);\n_cadastroUsuarioPage.default.clickCadastrar();\n_cadastroUsuarioPage.default.alertMessage.should('be.visible').and('contain', 'Este email já está sendo usado');",
+              "err": {},
+              "uuid": "19458e3f-eec6-4b23-9ae9-e4abc13d8b15",
+              "parentUUID": "319b6e47-726a-4ed6-82b9-9fdb65302aed",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "deve exibir mensagens de erro para campos obrigatórios @ui @cadastro @error",
+              "fullTitle": "Cadastro de Usuários - UI Tests deve exibir mensagens de erro para campos obrigatórios @ui @cadastro @error",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_cadastroUsuarioPage.default.clickCadastrar();\n_cadastroUsuarioPage.default.alertMessage.should('be.visible').and('contain', 'Nome é obrigatório').and('contain', 'Email é obrigatório').and('contain', 'Password é obrigatório');",
+              "err": {},
+              "uuid": "9dc53862-da68-4e9d-ad7a-46b65e291d0d",
+              "parentUUID": "319b6e47-726a-4ed6-82b9-9fdb65302aed",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "deve exibir erro ao tentar cadastrar com nome contendo caracteres especiais @ui @cadastro @error @caracteresEspeciais @possivelBug",
+              "fullTitle": "Cadastro de Usuários - UI Tests deve exibir erro ao tentar cadastrar com nome contendo caracteres especiais @ui @cadastro @error @caracteresEspeciais @possivelBug",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const usuarioComNomeEspecial = {\n  nome: 'João@#',\n  email: _faker.faker.internet.email(),\n  senha: _faker.faker.internet.password({\n    length: 8\n  })\n};\n_cadastroUsuarioPage.default.fillNome(usuarioComNomeEspecial.nome);\n_cadastroUsuarioPage.default.fillEmail(usuarioComNomeEspecial.email);\n_cadastroUsuarioPage.default.fillPassword(usuarioComNomeEspecial.senha);\n_cadastroUsuarioPage.default.clickCadastrar();\n// TODO: Verificar se o usuário foi cadastrado com sucesso - Implementação futura - Checkar com Dev team\n// Atualmente é possivel estar criando usuários com nome contendo caracteres especiais",
+              "err": {},
+              "uuid": "c4db9c9c-c70a-4364-a6c5-2971074136e6",
+              "parentUUID": "319b6e47-726a-4ed6-82b9-9fdb65302aed",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "deve exibir erro ao tentar cadastrar com email contendo @ no meio do email @ui @cadastro @error @caracteresEspeciais @possivelBug",
+              "fullTitle": "Cadastro de Usuários - UI Tests deve exibir erro ao tentar cadastrar com email contendo @ no meio do email @ui @cadastro @error @caracteresEspeciais @possivelBug",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const usuarioComEmailEspecial = {\n  nome: _faker.faker.person.fullName(),\n  email: 'email@invalido.com@teste.com',\n  senha: _faker.faker.internet.password({\n    length: 8\n  })\n};\n_cadastroUsuarioPage.default.fillNome(usuarioComEmailEspecial.nome);\n_cadastroUsuarioPage.default.fillEmail(usuarioComEmailEspecial.email);\n_cadastroUsuarioPage.default.fillPassword(usuarioComEmailEspecial.senha);\n_cadastroUsuarioPage.default.clickCadastrar();\n// TODO: Criar error handling para o email com @ no meio do email\n// Atualmente existe apenas uma validação de erro via tooltip, que não é suficiente para validar o erro\n// Verifica se a mensagem de erro aparece\n// CadastroUsuarioPage.alertMessage\n//     .should('be.visible')\n//     .and('contain', 'Email inválido'); // Mensagem de erro esperada -> uma parte após \"@\" não deve conter o simbolo \"@\"",
+              "err": {},
+              "uuid": "338e8a3b-096e-4574-87e1-7ea6d1fc418b",
+              "parentUUID": "319b6e47-726a-4ed6-82b9-9fdb65302aed",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": "deve exibir erro ao tentar cadastrar com nome e email contendo caracteres especiais @ui @cadastro @error @caracteresEspeciais @possivelBug",
+              "fullTitle": "Cadastro de Usuários - UI Tests deve exibir erro ao tentar cadastrar com nome e email contendo caracteres especiais @ui @cadastro @error @caracteresEspeciais @possivelBug",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const usuarioComNomeEEmailEspeciais = {\n  nome: 'João@#',\n  email: 'email#invalido.com@teste.com',\n  senha: _faker.faker.internet.password({\n    length: 8\n  })\n};\n_cadastroUsuarioPage.default.fillNome(usuarioComNomeEEmailEspeciais.nome);\n_cadastroUsuarioPage.default.fillEmail(usuarioComNomeEEmailEspeciais.email);\n_cadastroUsuarioPage.default.fillPassword(usuarioComNomeEEmailEspeciais.senha);\n_cadastroUsuarioPage.default.clickCadastrar();\n// TODO: Verificar se o usuário foi cadastrado com sucesso - Implementação futura - Checkar com Dev team\n// Atualmente é possivel estar criando usuários com nome contendo caracteres especiais",
+              "err": {},
+              "uuid": "c44cf75d-3fb5-4498-9b04-fd5676eeea5e",
+              "parentUUID": "319b6e47-726a-4ed6-82b9-9fdb65302aed",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "6990dcf5-c13d-4c24-820e-9eda30ab3907"
+          ],
+          "pending": [],
+          "skipped": [
+            "3e12217d-2a5d-49c7-b4df-15b01fe8e578",
+            "343ee0b9-03fc-4cf6-837e-b86c79b38599",
+            "19458e3f-eec6-4b23-9ae9-e4abc13d8b15",
+            "9dc53862-da68-4e9d-ad7a-46b65e291d0d",
+            "c4db9c9c-c70a-4364-a6c5-2971074136e6",
+            "338e8a3b-096e-4574-87e1-7ea6d1fc418b",
+            "c44cf75d-3fb5-4498-9b04-fd5676eeea5e"
+          ],
+          "duration": 6330,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-13T20:11:09.895Z",
+    "end": "2024-12-13T20:11:13.118Z",
+    "duration": 3223,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "dd1e2a2d-a7c2-4056-a13e-2c04841fdded",
+      "title": "",
+      "fullFile": "cypress\\e2e\\api_test\\carrinho_api.cy.js",
+      "file": "cypress\\e2e\\api_test\\carrinho_api.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d1de80b5-503a-4a62-baba-589a8cfba46a",
+          "title": "Testes de API - Carrinhos ServeRest @APITest",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve criar produto para testes @setup",
+              "fullTitle": "Testes de API - Carrinhos ServeRest @APITest Deve criar produto para testes @setup",
+              "timedOut": null,
+              "duration": 808,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Gerando nome de arquivo de imagem aleatório com extensão válida\nconst extensoes = ['jpg', 'png', 'gif'];\nconst extensaoAleatoria = faker.helpers.arrayElement(extensoes);\nconst nomeImagem = `C:\\\\fakepath\\\\${faker.string.uuid()}.${extensaoAleatoria}`;\n// Criando dados do produto de teste\nconst novoProduto = {\n  nome: `Produto ${faker.commerce.productName()}`,\n  preco: parseInt(faker.commerce.price(), 10),\n  descricao: faker.commerce.productDescription(),\n  quantidade: faker.number.int({\n    min: 10,\n    max: 100\n  }),\n  imagem: nomeImagem\n};\n// Enviando requisição POST para criar produto de teste\ncy.request({\n  method: 'POST',\n  url: `${Cypress.env('apiUrl')}/produtos`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  },\n  body: novoProduto\n}).then(response => {\n  // Logando informações do produto criado\n  console.log('Produto de Teste Criado:', response.body);\n  cy.log('**Produto de Teste Criado**');\n  cy.log(`Nome: ${novoProduto.nome}`);\n  cy.log(`Preço: ${novoProduto.preco}`);\n  cy.log(`Descrição: ${novoProduto.descricao}`);\n  cy.log(`Quantidade: ${novoProduto.quantidade}`);\n  cy.log(`Imagem: ${novoProduto.imagem}`);\n  cy.log(`ID: ${response.body._id}`);\n  // Validando resposta da API e armazenando ID do produto\n  expect(response.status).to.equal(201);\n  productId = response.body._id;\n});",
+              "err": {},
+              "uuid": "429c732d-2f74-44d2-bcb7-1b8c6f26d1b4",
+              "parentUUID": "d1de80b5-503a-4a62-baba-589a8cfba46a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve cadastrar um novo carrinho com sucesso @crud @post",
+              "fullTitle": "Testes de API - Carrinhos ServeRest @APITest Deve cadastrar um novo carrinho com sucesso @crud @post",
+              "timedOut": null,
+              "duration": 365,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Criando dados do novo carrinho com quantidade aleatória do produto\nconst novoCarrinho = {\n  produtos: [{\n    idProduto: productId,\n    quantidade: faker.number.int({\n      min: 1,\n      max: 5\n    })\n  }]\n};\ntestData.novoCarrinho = novoCarrinho;\n// Enviando requisição POST para criar novo carrinho\ncy.request({\n  method: 'POST',\n  url: `${Cypress.env('apiUrl')}/carrinhos`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  },\n  body: novoCarrinho\n}).then(response => {\n  // Armazenando resposta para possível uso posterior\n  testData.response = {\n    status: response.status,\n    body: response.body\n  };\n  // Logando informações do carrinho criado\n  console.log('Carrinho Criado:', response.body);\n  cy.log('**Carrinho Criado**');\n  cy.log(`ID do Carrinho: ${response.body._id}`);\n  cy.log(`Quantidade de Produtos: ${novoCarrinho.produtos.length}`);\n  cy.log(`ID do Produto: ${novoCarrinho.produtos[0].idProduto}`);\n  cy.log(`Quantidade do Produto: ${novoCarrinho.produtos[0].quantidade}`);\n  // Validando resposta da API\n  expect(response.status).to.equal(201);\n  expect(response.body.message).to.equal('Cadastro realizado com sucesso');\n  cartId = response.body._id;\n});",
+              "err": {},
+              "uuid": "e764f9ec-634b-40f7-b7c5-80049d5461f1",
+              "parentUUID": "d1de80b5-503a-4a62-baba-589a8cfba46a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve listar todos os carrinhos @crud @get",
+              "fullTitle": "Testes de API - Carrinhos ServeRest @APITest Deve listar todos os carrinhos @crud @get",
+              "timedOut": null,
+              "duration": 357,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição GET para listar todos os carrinhos\ncy.request({\n  method: 'GET',\n  url: `${Cypress.env('apiUrl')}/carrinhos`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  }\n}).then(response => {\n  // Logando informações da lista de carrinhos\n  console.log('Lista de Carrinhos:', response.body);\n  cy.log('**Lista de Carrinhos**');\n  cy.log(`Total de Carrinhos: ${response.body.carrinhos.length}`);\n  // Validando resposta da API\n  expect(response.status).to.equal(200);\n  expect(response.body.carrinhos).to.be.an('array');\n});",
+              "err": {},
+              "uuid": "e02375e0-aa76-41f5-a12a-419641f213fc",
+              "parentUUID": "d1de80b5-503a-4a62-baba-589a8cfba46a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve buscar carrinho por ID @crud @get",
+              "fullTitle": "Testes de API - Carrinhos ServeRest @APITest Deve buscar carrinho por ID @crud @get",
+              "timedOut": null,
+              "duration": 359,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição GET para buscar carrinho específico\ncy.request({\n  method: 'GET',\n  url: `${Cypress.env('apiUrl')}/carrinhos/${cartId}`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  }\n}).then(response => {\n  // Logando informações do carrinho encontrado\n  console.log('Carrinho por ID:', response.body);\n  cy.log('**Carrinho Buscado**');\n  cy.log(`ID do Carrinho: ${response.body._id}`);\n  cy.log(`Produtos no Carrinho: ${response.body.produtos.length}`);\n  // Validando resposta da API\n  expect(response.status).to.equal(200);\n  expect(response.body).to.have.property('produtos');\n});",
+              "err": {},
+              "uuid": "0157e944-f201-412d-b437-4a7bb829b90d",
+              "parentUUID": "d1de80b5-503a-4a62-baba-589a8cfba46a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve concluir a compra do carrinho @crud @delete",
+              "fullTitle": "Testes de API - Carrinhos ServeRest @APITest Deve concluir a compra do carrinho @crud @delete",
+              "timedOut": null,
+              "duration": 353,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição DELETE para concluir a compra\ncy.request({\n  method: 'DELETE',\n  url: `${Cypress.env('apiUrl')}/carrinhos/concluir-compra`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  }\n}).then(response => {\n  // Logando informações da conclusão da compra\n  console.log('Compra Concluída:', response.body);\n  cy.log('**Compra Concluída**');\n  cy.log(`Mensagem: ${response.body.message}`);\n  // Validando resposta da API\n  expect(response.status).to.equal(200);\n  expect(response.body.message).to.equal('Registro excluído com sucesso');\n});",
+              "err": {},
+              "uuid": "c757a85c-9e89-49b2-8cb0-16a4ac49d5fa",
+              "parentUUID": "d1de80b5-503a-4a62-baba-589a8cfba46a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve cancelar a compra do carrinho @crud @delete",
+              "fullTitle": "Testes de API - Carrinhos ServeRest @APITest Deve cancelar a compra do carrinho @crud @delete",
+              "timedOut": null,
+              "duration": 520,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Criando novo carrinho para teste de cancelamento\nconst novoCarrinho = {\n  produtos: [{\n    idProduto: productId,\n    quantidade: faker.number.int({\n      min: 1,\n      max: 5\n    })\n  }]\n};\n// Enviando requisição POST para criar carrinho que será cancelado\ncy.request({\n  method: 'POST',\n  url: `${Cypress.env('apiUrl')}/carrinhos`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  },\n  body: novoCarrinho\n}).then(responseCarrinho => {\n  // Logando informações do carrinho criado\n  console.log('Carrinho Criado para Cancelamento:', responseCarrinho.body);\n  cy.log('**Carrinho Criado para Cancelamento**');\n  cy.log(`ID do Carrinho: ${responseCarrinho.body._id}`);\n  // Enviando requisição DELETE para cancelar a compra\n  cy.request({\n    method: 'DELETE',\n    url: `${Cypress.env('apiUrl')}/carrinhos/cancelar-compra`,\n    headers: {\n      Authorization: Cypress.env('TOKEN')\n    }\n  }).then(response => {\n    // Logando informações do cancelamento\n    console.log('Compra Cancelada:', response.body);\n    cy.log('**Compra Cancelada**');\n    cy.log(`Mensagem: ${response.body.message}`);\n    // Validando resposta da API\n    expect(response.status).to.equal(200);\n    expect(response.body.message).to.equal('Registro excluído com sucesso. Estoque dos produtos reabastecido');\n  });\n});",
+              "err": {},
+              "uuid": "feb9997b-3d20-4579-9e37-525dd8e8215b",
+              "parentUUID": "d1de80b5-503a-4a62-baba-589a8cfba46a",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve tentar cancelar a compra do carrinho de um usuário que não tem carrinho @crud @delete",
+              "fullTitle": "Testes de API - Carrinhos ServeRest @APITest Deve tentar cancelar a compra do carrinho de um usuário que não tem carrinho @crud @delete",
+              "timedOut": null,
+              "duration": 362,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Enviando requisição DELETE para tentar cancelar compra sem carrinho\ncy.request({\n  method: 'DELETE',\n  url: `${Cypress.env('apiUrl')}/carrinhos/cancelar-compra`,\n  headers: {\n    Authorization: Cypress.env('TOKEN')\n  }\n}).then(response => {\n  // Logando informações da tentativa de cancelamento\n  console.log('Compra Cancelada:', response.body);\n  cy.log('**Compra Cancelada**');\n  cy.log(`Mensagem: ${response.body.message}`);\n  // Validando resposta da API para cenário de erro\n  expect(response.status).to.equal(200);\n  expect(response.body.message).to.equal('Não foi encontrado carrinho para esse usuário');\n});",
+              "err": {},
+              "uuid": "ab61722a-7a7a-4bcd-bb47-061d57297195",
+              "parentUUID": "d1de80b5-503a-4a62-baba-589a8cfba46a",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "429c732d-2f74-44d2-bcb7-1b8c6f26d1b4",
+            "e764f9ec-634b-40f7-b7c5-80049d5461f1",
+            "e02375e0-aa76-41f5-a12a-419641f213fc",
+            "0157e944-f201-412d-b437-4a7bb829b90d",
+            "c757a85c-9e89-49b2-8cb0-16a4ac49d5fa",
+            "feb9997b-3d20-4579-9e37-525dd8e8215b",
+            "ab61722a-7a7a-4bcd-bb47-061d57297195"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3124,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

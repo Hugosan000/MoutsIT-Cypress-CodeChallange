@@ -1,0 +1,219 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-12-13T20:10:32.539Z",
+    "end": "2024-12-13T20:11:05.885Z",
+    "duration": 33346,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "cdd1b430-ef39-4d08-9a23-3b0325eae2e9",
+      "title": "",
+      "fullFile": "cypress\\e2e\\UI_test\\produtos_ui.cy.js",
+      "file": "cypress\\e2e\\UI_test\\produtos_ui.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "cf147e74-9894-4785-83bf-f9866caf361e",
+          "title": "Cadastro de Produtos - UI Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "deve exibir a página de cadastro de produtos corretamente @ui @smoke",
+              "fullTitle": "Cadastro de Produtos - UI Tests deve exibir a página de cadastro de produtos corretamente @ui @smoke",
+              "timedOut": null,
+              "duration": 3744,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_produtosPage.default.nomeProdutoInput.should('be.visible');\n_produtosPage.default.descricaoInput.should('be.visible');\n_produtosPage.default.precoInput.should('be.visible');\n_produtosPage.default.quantidadeInput.should('be.visible');\n_produtosPage.default.salvarButton.should('be.visible');",
+              "err": {},
+              "uuid": "14f3c68d-e9b1-49be-9b75-d11be06ea558",
+              "parentUUID": "cf147e74-9894-4785-83bf-f9866caf361e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve cadastrar um novo produto com sucesso @ui @produtos",
+              "fullTitle": "Cadastro de Produtos - UI Tests deve cadastrar um novo produto com sucesso @ui @produtos",
+              "timedOut": null,
+              "duration": 4625,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.log('Criando novo produto com os dados:');\ncy.log(`Nome: ${produtoValido.nome}`);\ncy.log(`Descrição: ${produtoValido.descricao}`);\ncy.log(`Preço: R$ ${produtoValido.preco}`);\ncy.log(`Quantidade: ${produtoValido.quantidade}`);\n_produtosPage.default.preencherFormulario(produtoValido.nome, produtoValido.descricao, produtoValido.preco, produtoValido.quantidade);\n_produtosPage.default.clickSalvar();\ncy.log('Produto cadastrado com sucesso!');",
+              "err": {},
+              "uuid": "da900d54-3334-456a-a051-000bae1424ac",
+              "parentUUID": "cf147e74-9894-4785-83bf-f9866caf361e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve exibir mensagens de erro ao tentar cadastrar produto sem preencher campos obrigatórios @ui @produtos @error",
+              "fullTitle": "Cadastro de Produtos - UI Tests deve exibir mensagens de erro ao tentar cadastrar produto sem preencher campos obrigatórios @ui @produtos @error",
+              "timedOut": null,
+              "duration": 3832,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_produtosPage.default.clickSalvar();\n// Verificar mensagens de validação\n_produtosPage.default.alertMessage.should('be.visible').and('contain', 'Nome é obrigatório').and('contain', 'Preco é obrigatório').and('contain', 'Quantidade é obrigatório');",
+              "err": {},
+              "uuid": "dde83dd4-74e9-4ff2-884e-6429a1605c28",
+              "parentUUID": "cf147e74-9894-4785-83bf-f9866caf361e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve validar formato do preço ao cadastrar produto @ui @produtos @error",
+              "fullTitle": "Cadastro de Produtos - UI Tests deve validar formato do preço ao cadastrar produto @ui @produtos @error",
+              "timedOut": null,
+              "duration": 4477,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_produtosPage.default.preencherFormulario(produtoValido.nome, produtoValido.descricao, 'abc', produtoValido.quantidade);\n_produtosPage.default.clickSalvar();\n// Verificar mensagem de erro\n// Não é possivel inserir letras no campo preço, ao tentar inserir letras, o campo fica vazio e a mensagem de erro é \"Preco é obrigatório\"\n_produtosPage.default.alertMessage.should('be.visible').and('contain', 'Preco é obrigatório');",
+              "err": {},
+              "uuid": "bc12670a-ce68-42a0-b2eb-20427f0cb26d",
+              "parentUUID": "cf147e74-9894-4785-83bf-f9866caf361e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve validar quantidade mínima ao cadastrar produto @ui @produtos @error",
+              "fullTitle": "Cadastro de Produtos - UI Tests deve validar quantidade mínima ao cadastrar produto @ui @produtos @error",
+              "timedOut": null,
+              "duration": 4453,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_produtosPage.default.preencherFormulario(produtoValido.nome, produtoValido.descricao, produtoValido.preco, '-1');\n_produtosPage.default.clickSalvar();\n// Verificar mensagem de erro\n_produtosPage.default.alertMessage.should('be.visible').and('contain', 'Quantidade deve ser maior ou igual a 0');",
+              "err": {},
+              "uuid": "ecc33453-1063-4d47-bc8e-d1bbd0f1b0d8",
+              "parentUUID": "cf147e74-9894-4785-83bf-f9866caf361e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve fazer upload de imagem com sucesso @ui @produtos @imagem",
+              "fullTitle": "Cadastro de Produtos - UI Tests deve fazer upload de imagem com sucesso @ui @produtos @imagem",
+              "timedOut": null,
+              "duration": 4230,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.log('Criando produto com imagem:');\ncy.log(`Nome: ${produtoValido.nome}`);\n_produtosPage.default.preencherFormulario(produtoValido.nome, produtoValido.descricao, produtoValido.preco, produtoValido.quantidade, 'valido' // indica que deve usar imagem válida\n);\n_produtosPage.default.clickSalvar();\ncy.log('Produto com imagem cadastrado com sucesso!');",
+              "err": {},
+              "uuid": "85ebf86a-4350-4a95-ac3b-6a6facd3e277",
+              "parentUUID": "cf147e74-9894-4785-83bf-f9866caf361e",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "deve validar formato de arquivo de imagem @ui @produtos @imagem @error",
+              "fullTitle": "Cadastro de Produtos - UI Tests deve validar formato de arquivo de imagem @ui @produtos @imagem @error",
+              "timedOut": null,
+              "duration": 4900,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_produtosPage.default.preencherFormulario(produtoValido.nome, produtoValido.descricao, produtoValido.preco, produtoValido.quantidade, 'invalido' // indica que deve usar imagem inválida\n);\n_produtosPage.default.clickSalvar();\n// Verifica mensagem de erro\n//TODO: Criar mensagem de validação de upload de imagem - Atualmente todo tipo de arquivo é aceito\n// ProdutosPage.alertMessage\n//     .should('be.visible')\n//     .and('contain', 'Formato de imagem inválido');",
+              "err": {},
+              "uuid": "2cf5cfaf-ca86-4604-b9e3-d0fd063ab53b",
+              "parentUUID": "cf147e74-9894-4785-83bf-f9866caf361e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "14f3c68d-e9b1-49be-9b75-d11be06ea558",
+            "da900d54-3334-456a-a051-000bae1424ac",
+            "dde83dd4-74e9-4ff2-884e-6429a1605c28",
+            "bc12670a-ce68-42a0-b2eb-20427f0cb26d",
+            "ecc33453-1063-4d47-bc8e-d1bbd0f1b0d8",
+            "85ebf86a-4350-4a95-ac3b-6a6facd3e277",
+            "2cf5cfaf-ca86-4604-b9e3-d0fd063ab53b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 30261,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
